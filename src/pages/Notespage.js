@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Listitem from "../components/Listitem.js";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AddButton from "../components/AddButton.js";
-
+import axios from "axios";
 const Notespage = () => {
   let [notes, setState] = useState([]); //setting the state
   //Using useEffect hook which takes a function and an empty array which tells there are no dependecies and this function is fired only on first load
@@ -12,10 +12,10 @@ const Notespage = () => {
   }, []);
   //getnotes which is making an api call using async await
   let getnotes = async () => {
-    let response = await fetch("http://localhost:5000/notes");
-    let data = await response.json();
-
-    setState(data);
+    let response = await axios.get("notes");
+    // let data = await response.json();
+   console.log(response.data);
+    setState(response.data);
   };
   return (
     <div className="notes">
